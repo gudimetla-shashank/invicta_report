@@ -3,7 +3,7 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - main
+      - main # Adjust this if your default branch is named differently
 
 jobs:
   deploy:
@@ -17,5 +17,5 @@ jobs:
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./ # Update if necessary
+        publish_dir: ./ # Update this to the correct directory containing your HTML files
         publish_branch: gh-pages
