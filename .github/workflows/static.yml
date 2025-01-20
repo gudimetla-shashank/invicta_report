@@ -45,18 +45,21 @@ jobs:
 
       - name: Update -pages branch with Deployment Link
         run: |
-          # Create a temp directory
-          mkdir temp-pages
-          cd temp-pages
-          git init
-          git remote add origin https://github.com/${{ github.repository }}.git
+              # Create a temp directory
+              mkdir temp-pages
+              cd temp-pages
+              git init
+              git remote add origin https://github.com/${{ github.repository }}.git
+              
+              # Check out the '-pages' branch
+              git fetch origin
+              git checkout pages
           
-          # Check out the '-pages' branch
-          git fetch origin
-          git checkout pages
+              # Create a file to store the deployment link
+              echo "Deployment URL: ${{ steps.deployment.outputs.page_url }}" > deployment_link.txt
+              git add deployment_link.txt
+              git commit -m "Add deployment link"
+          
+              # Use GITHUB_TOKEN to authenticate while pushing
+              git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }} pages
 
-          # Create a file to store the deployment link
-          echo "Deployment URL: ${{ steps.deployment.outputs.page_url }}" > deployment_link.txt
-          git add deployment_link.txt
-          git commit -m "Add deployment link"
-          git push origin pages
