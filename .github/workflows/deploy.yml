@@ -1,0 +1,32 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main # Replace 'main' with your default branch name if it's different
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    - name: Setup Node.js (required by some GitHub Actions)
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18
+
+    - name: Install Dependencies (if any, optional)
+      run: npm install # Remove if there are no dependencies
+
+    - name: Build Project (if required)
+      run: npm run build # Remove or replace if there's no build process
+
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./ # Update if your build generates files in a specific directory
+        publish_branch: gh-pages
