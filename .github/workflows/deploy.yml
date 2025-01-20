@@ -3,7 +3,7 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - main  # Trigger on push to main branch (or adjust if you're using a different branch)
+      - main  # Trigger on push to the main branch (adjust if necessary)
   workflow_dispatch:  # Allows manual triggering
 
 jobs:
@@ -27,9 +27,16 @@ jobs:
 
     - name: Deploy to gh-pages
       run: |
-        git clone --single-branch --branch gh-pages https://github.com/${{ github.repository }} gh-pages
-        cp -R * gh-pages/  # Copy all files to gh-pages
-        cd gh-pages
+        # Clone the gh-pages branch into a temporary directory
+        git clone --single-branch --branch gh-pages https://github.com/${{ github.repository }} gh-pages-temp
+        
+        # Copy the files from the main branch to the temporary directory
+        cp -R * gh-pages-temp/
+        
+        # Move into the temporary directory
+        cd gh-pages-temp
+        
+        # Commit and push the changes to gh-pages
         git add .
         git commit -m "Deploy updates to GitHub Pages"
         git push origin gh-pages
