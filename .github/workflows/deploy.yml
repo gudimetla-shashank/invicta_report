@@ -17,5 +17,5 @@ jobs:
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./ # Update this to the correct directory containing your HTML files
+        publish_dir: ./ # Update this to the correct directory containing your HTML 
         publish_branch: gh-pages
