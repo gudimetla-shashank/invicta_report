@@ -30,12 +30,12 @@ jobs:
         # Clone the gh-pages branch into a temporary directory
         git clone --single-branch --branch gh-pages https://github.com/${{ github.repository }} gh-pages-temp
         
-        # Remove the existing files in gh-pages-temp (this ensures clean deployment)
+        # Clean up the gh-pages-temp directory (to avoid copying into itself)
         rm -rf gh-pages-temp/*
 
-        # Copy files from the correct directory to the gh-pages-temp directory
-        cp -R * gh-pages-temp/  # Adjust this if needed (e.g., `cp -R dist/* gh-pages-temp/`)
-
+        # Copy the content from the current repository to the gh-pages-temp directory
+        cp -R ./* gh-pages-temp/  # This will copy everything EXCEPT the `.git` folder and the `gh-pages-temp` directory
+        
         # Move into the gh-pages-temp directory
         cd gh-pages-temp
         
