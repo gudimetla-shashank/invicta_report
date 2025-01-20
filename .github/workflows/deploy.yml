@@ -33,9 +33,9 @@ jobs:
         # Remove the existing files in gh-pages-temp (this ensures clean deployment)
         rm -rf gh-pages-temp/*
 
-        # Copy files from the main branch to the gh-pages-temp directory
-        cp -R ./html/* gh-pages-temp/  # Adjust `./html/*` if your HTML files are located elsewhere
-        
+        # Copy files from the correct directory to the gh-pages-temp directory
+        cp -R * gh-pages-temp/  # Adjust this if needed (e.g., `cp -R dist/* gh-pages-temp/`)
+
         # Move into the gh-pages-temp directory
         cd gh-pages-temp
         
