@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - main # Adjust this if your default branch is named differently
-
+  workflow_dispatch:
 jobs:
   deploy:
     runs-on: ubuntu-latest
