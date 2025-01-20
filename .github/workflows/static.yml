@@ -1,11 +1,8 @@
 name: Deploy static content to Pages
 
 on:
-  # Runs on pushes targeting the default branch
   push:
     branches: ["main"]
-
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
 permissions:
@@ -40,6 +37,11 @@ jobs:
         uses: actions/deploy-pages@v4
         with:
           branch: pages  # Deploying to the 'pages' branch
+
+      - name: Set up Git identity
+        run: |
+          git config --global user.email "gudimetlashashank999@gmail.com"
+          git config --global user.name "shashank"
 
       - name: Update -pages branch with Deployment Link
         run: |
